@@ -48,7 +48,7 @@ class NightWriterTest < Minitest::Test
     night_writer = NightWriter.new("message.txt", "braille.txt")
     night_writer.stubs(:read_message).returns("Hello")
 
-    assert_equal 5, night_writer.character_count
+    assert_equal 10, night_writer.character_count
   end
 
 end

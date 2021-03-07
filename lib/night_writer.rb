@@ -1,7 +1,6 @@
-require './lib/braille'
+require './lib/braille_maker'
 
-import_file = ARGF.argv.first
-export_file = ARGF.argv.last
+# import_file, export_file = ARGF.argv
 
 class NightWriter
 
@@ -13,24 +12,24 @@ class NightWriter
     @export_file = export_file
   end
 
-  def transform_to_braille
-    Braille.new.braille_printable(read_message)
+  def english_to_braille
+    BrailleMaker.new.braille_printable(read_message)
   end
 
-  def make_braille
-    File.open(export_file_path, 'w') { |line| line.puts transform_to_braille }
+  def print_braille
+    File.open(export_file_path, 'w') { |line| line.puts english_to_braille }
   end
 
-  def message_file
-    File.new(import_file_path)
+  def message
+    File.open(import_file_path)
   end
 
   def read_message
-    message_file.read.chomp
+    message.read.chomp
   end
 
   def character_count
-    read_message.length
+    read_message.length * 2
   end
 
   def confirmation_message
@@ -47,7 +46,6 @@ class NightWriter
 
 end
 
-#
 # night_writer = NightWriter.new(import_file, export_file)
-# night_writer.make_braille
+# night_writer.print_braille
 # puts night_writer.confirmation_message
