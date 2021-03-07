@@ -1,3 +1,8 @@
+require './lib/braille'
+
+import_file = ARGF.argv.first
+export_file = ARGF.argv.last
+
 class NightWriter
 
   attr_reader :import_file,
@@ -8,22 +13,16 @@ class NightWriter
     @export_file = export_file
   end
 
-  #tested
-  def import_file_path
-    "./data/" + import_file
-  end
-
-  #not tested
-  def export_file_path
-    "./braille/" + export_file
+  def transform_to_braille
+    Braille.new.braille_printable(read_message)
   end
 
   def make_braille
-    File.write(export_file_path, read_message)
+    File.open(export_file_path, 'w') { |line| line.puts transform_to_braille }
   end
 
   def message_file
-    message = File.new(import_file_path)
+    File.new(import_file_path)
   end
 
   def read_message
@@ -38,10 +37,17 @@ class NightWriter
     "Created '#{export_file}' containing #{character_count} characters"
   end
 
+  def import_file_path
+    "./data/" + import_file
+  end
+
+  def export_file_path
+    "./braille/" + export_file
+  end
+
 end
 
-import_file = ARGF.argv.first
-export_file = ARGF.argv.last
-
-night_writer = NightWriter.new(import_file, export_file)
+#
+# night_writer = NightWriter.new(import_file, export_file)
+# night_writer.make_braille
 # puts night_writer.confirmation_message

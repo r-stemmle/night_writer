@@ -51,10 +51,4 @@ class NightWriterTest < Minitest::Test
     assert_equal 5, night_writer.character_count
   end
 
-  def test_it_can_create_braille_output_text_file
-    night_writer = NightWriter.new("message.txt", "braille.txt")
-
-    assert_equal Integer, night_writer.make_braille.class
-  end
-
 end
