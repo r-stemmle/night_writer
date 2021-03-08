@@ -11,17 +11,11 @@ class NightWriterTest < Minitest::Test
     assert_instance_of NightWriter, night_writer
   end
 
-  def test_it_can_produce_message_text_as_string
-    night_writer = NightWriter.new("message.txt", "braille.txt")
-
-    assert_equal String, night_writer.read_message.class
-  end
-
   def test_it_can_read_message_character_length
     night_writer = NightWriter.new("message.txt", "braille.txt")
-    night_writer.stubs(:read_message).returns("Hello")
+    night_writer.stubs(:message).returns("hello\n")
 
-    assert_equal 3, night_writer.character_count
+    assert_equal 5, night_writer.character_count
   end
 
 end
