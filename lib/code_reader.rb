@@ -11,15 +11,7 @@ class CodeReader
   end
 
   def message
-    File.open(import_file)
-  end
-
-  def read_message
-    message.read.chomp
-  end
-
-  def character_count
-    message.first.chomp.length
+    File.open(import_file).read.chomp
   end
 
   def confirmation_message
