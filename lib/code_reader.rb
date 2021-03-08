@@ -1,25 +1,34 @@
-
+require './lib/braille_maker'
+require './lib/alpha_maker'
 
 class CodeReader
 
-  attr_reader :import_file,
-              :export_file
+  attr_reader :inbox,
+              :outbox,
+              :braille_maker,
+              :alpha_maker
 
-  def initialize(import_file, export_file)
-    @import_file = "./data/" + import_file
-    @export_file = "./data/" + export_file
+  def initialize(inbox, outbox)
+    @inbox = inbox
+    @outbox = File.new("./data/" + outbox, "w")
+    @braille_maker = BrailleMaker.new
+    @alpha_maker = AlphaMaker.new
   end
 
   def message
-    File.open(import_file).read.chomp
+    File.open(inbox_path).read.chomp
   end
 
   def confirmation_message
-    "Created '#{export_file_printable}' containing #{character_count} characters"
+    "Created '#{outbox_path.delete_prefix("./data/")}' containing #{character_count} characters"
   end
 
-  def export_file_printable
-    export_file.delete_prefix("./data/")
+  def inbox_path
+    "./data/" + inbox
+  end
+
+  def outbox_path
+    outbox.path
   end
 
 end

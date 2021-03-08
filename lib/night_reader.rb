@@ -2,22 +2,17 @@ require './lib/alpha_maker'
 require './lib/code_reader'
 
 class NightReader < CodeReader
-  # def initialize(inbox, outbox, alpha_maker)
-  #   @inbox = inbox
-  #   @outbox = outbox
-  #   @alpha_maker = alpha_maker
-  # end
 
   def braille_to_english
-    AlphaMaker.new.english_printable(make_alpha_ready(message))
+    alpha_maker.english_printable(make_alpha_ready(message))
   end
 
   def print_english
-    File.open(export_file, 'w') { |line| line.puts braille_to_english }
+    File.open(outbox_path, 'w') { |line| line.puts braille_to_english }
   end
 
   def message
-    braille = File.open(import_file)
+    braille = File.open(inbox_path)
     braille.readlines.map(&:chomp)
   end
 
@@ -37,8 +32,8 @@ class NightReader < CodeReader
 
 end
 
-# import_file, export_file = ARGF.argv
-# night_reader = NightReader.new(import_file, export_file)
+# inbox, outbox = ARGF.argv
+# night_reader = NightReader.new(inbox, outbox)
 # night_reader.print_english
 # puts night_reader.confirmation_message
 
