@@ -8,12 +8,12 @@ class AlphaMaker
 
   def initialize
     @dictionary = english_to_braille.invert
-    @phrase = []
+    @message = []
   end
 
   def english_printable(input)
     get_braille_array(input)
-    @phrase.map { |braille| get_alpha_letter(braille) }.join
+    @message.map { |braille| get_alpha_letter(braille) }.join
   end
 
   def get_braille_array(input)
@@ -24,9 +24,9 @@ class AlphaMaker
       input.each do |braille|
         holder << braille.slice!(0..1)
       end
-      @phrase << holder; index += 1
+      @message << holder; index += 1
     end
-    @phrase << input
+    @message << input
   end
 
   def get_alpha_letter(input)

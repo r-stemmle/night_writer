@@ -1,5 +1,4 @@
 require './data/braille_dictionary'
-require 'json'
 
 class BrailleMaker
 
@@ -9,13 +8,14 @@ include BrailleDictionary
 
   def initialize
     @dictionary  = english_to_braille
+    @message = []
   end
 
   def braille_printable(text)
-    message = []; line = []
+    line = []
     braille_array(text).each_with_index do |braille_letter, index|
       if line_full(index)
-        message += line
+        @message += line
         line.clear
         line = braille_letter
       elsif index == 0
@@ -24,7 +24,7 @@ include BrailleDictionary
         line = line.zip(braille_letter).map(&:join)
       end
     end
-    message += line
+    @message += line
   end
 
   def braille_array(word)
