@@ -1,30 +1,30 @@
-require './lib/braille_dictionary'
+require './data/braille_dictionary'
 require 'json'
 
 class BrailleMaker
 
 include BrailleDictionary
 
-  attr_reader :letters
+  attr_reader :dictionary
 
   def initialize
-    @letters  = english_to_braille
+    @dictionary  = english_to_braille
   end
 
   def braille_printable(text)
-    holder = []; initial = []
-    braille_array(text).each_with_index do |array, index|
-      if index % 40 == 0 && index != 0
-        holder += initial
-        initial.clear
-        initial = array
+    message = []; line = []
+    braille_array(text).each_with_index do |braille_letter, index|
+      if line_full(index)
+        message += line
+        line.clear
+        line = braille_letter
       elsif index == 0
-        initial = array
+        line = braille_letter
       else
-        initial = initial.zip(array).map(&:join)
+        line = line.zip(braille_letter).map(&:join)
       end
     end
-    holder += initial
+    message += line
   end
 
   def braille_array(word)
@@ -36,7 +36,11 @@ include BrailleDictionary
   end
 
   def braille_letter(alpha)
-    letters[alpha]
+    dictionary[alpha]
+  end
+
+  def line_full(index)
+    index % 40 == 0 && index != 0
   end
 
 end

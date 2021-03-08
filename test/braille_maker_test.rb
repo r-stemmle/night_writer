@@ -13,7 +13,7 @@ class BrailleMakerTest < Minitest::Test
   def test_it_has_attributes
     braille = BrailleMaker.new
 
-    assert_equal ["0.", "0.", "00"], braille.letters["v"]
+    assert_equal ["0.", "0.", "00"], braille.dictionary["v"]
   end
 
   def test_it_views_entries_as_arrays
