@@ -14,14 +14,14 @@ class NightReaderTest < Minitest::Test
   def test_it_can_produce_message_as_array
     night_reader = NightReader.new("braille.txt", "original_message.txt")
 
-    assert_equal Array, night_reader.message.class
+    assert_equal Array, night_reader.incoming_message.class
   end
 
   def test_it_can_read_message_character_length
     night_reader = NightReader.new("braille.txt", "original_message.txt")
-    night_reader.stubs(:message).returns(["0.0.", "0.0.", "0.0."])
+    night_reader.stubs(:message).returns("0.0.\n0.0.\n0.0.")
 
-    assert_equal 4, night_reader.character_count
+    assert_equal 12, night_reader.character_count
   end
 
   def test_it_can_make_array_of_3_strings_always

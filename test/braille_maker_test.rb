@@ -47,10 +47,10 @@ class BrailleMakerTest < Minitest::Test
     [ "000.0.",
       "....0.",
       "......"]
-    assert_equal expected, braille.braille_printable(word)
+    assert_equal expected, braille.punch_braille(word)
   end
 
-  def test_it_can_make_braille_printable_sentence
+  def test_it_can_make_punch_braille_sentence
     # skip
     braille = BrailleMaker.new
     word = "cab cab cab"
@@ -58,7 +58,7 @@ class BrailleMakerTest < Minitest::Test
     [ "000.0...000.0...000.0.",
       "....0.......0.......0.",
       "......................"]
-    assert_equal expected, braille.braille_printable(word)
+    assert_equal expected, braille.punch_braille(word)
   end
 
   def test_it_can_wrap_sentence_at_40_chars
@@ -72,6 +72,6 @@ class BrailleMakerTest < Minitest::Test
     "................................................................................",
     "0.", "..", ".."
     ]
-    assert_equal expected, braille.braille_printable(word)
+    assert_equal expected, braille.punch_braille(word)
   end
 end

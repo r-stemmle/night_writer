@@ -6,29 +6,27 @@ class CodeReader
   attr_reader :inbox,
               :outbox,
               :braille_maker,
-              :alpha_maker
+              :alpha_maker,
+              :message
 
   def initialize(inbox, outbox)
-    @inbox = inbox
+    @inbox = File.new("./data/" + inbox, "r")
     @outbox = File.new("./data/" + outbox, "w")
     @braille_maker = BrailleMaker.new
     @alpha_maker = AlphaMaker.new
-  end
-
-  def message
-    File.open(inbox_path).read.chomp
+    @message = File.open("./data/" + inbox).read
   end
 
   def confirmation_message
-    "Created '#{outbox_path.delete_prefix("./data/")}' containing #{character_count} characters"
+    "Created '#{outbox_path}' containing #{character_count} characters"
   end
 
   def inbox_path
-    "./data/" + inbox
+    inbox.path.delete_prefix("./data/")
   end
 
   def outbox_path
-    outbox.path
+    outbox.path.delete_prefix("./data/")
   end
 
 end

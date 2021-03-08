@@ -13,13 +13,13 @@ class CodeReaderTest < Minitest::Test
   def test_it_can_find_import_file_path
     night_writer = CodeReader.new("message.txt", "braille.txt")
 
-    assert_equal "./data/message.txt", night_writer.inbox_path
+    assert_equal "message.txt", night_writer.inbox_path
   end
 
   def test_it_can_find_export_file_path
     night_writer = CodeReader.new("message.txt", "braille.txt")
 
-    assert_equal "./data/braille.txt", night_writer.outbox_path
+    assert_equal "braille.txt", night_writer.outbox_path
   end
 
   def test_it_has_a_confirmation_message

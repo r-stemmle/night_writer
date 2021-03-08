@@ -1,40 +1,38 @@
-require './lib/alpha_maker'
 require './lib/code_reader'
 
 class NightReader < CodeReader
 
   def braille_to_english
-    alpha_maker.english_printable(make_alpha_ready(message))
+    alpha_maker.english_printable(make_alpha_ready(incoming_message))
   end
 
   def print_english
-    File.open(outbox_path, 'w') { |line| line.puts braille_to_english }
+    outbox.puts braille_to_english
   end
 
-  def message
-    braille = File.open(inbox_path)
-    braille.readlines.map(&:chomp)
+  def incoming_message
+    inbox.readlines.map(&:chomp)
   end
 
-  def make_alpha_ready(input)
-    index = (input.length / 3) - 2
-    first_line = input.slice!(0..2)
-    index.times do
-      first_line = first_line.zip(input.slice!(0..2)).map(&:join)
+  def make_alpha_ready(from_braille)
+    loop_number = (from_braille.length / 3) - 2
+    first_line = from_braille.slice!(0..2)
+    loop_number.times do
+      first_line = first_line.zip(from_braille.slice!(0..2)).map(&:join)
     end
-    final = first_line.zip(input).map(&:join)
+    final = first_line.zip(from_braille).map(&:join)
     final
   end
 
   def character_count
-    make_alpha_ready(message).first.length
+    message.split.map(&:chomp).join.length
   end
 
 end
 
-# inbox, outbox = ARGF.argv
-# night_reader = NightReader.new(inbox, outbox)
-# night_reader.print_english
-# puts night_reader.confirmation_message
+inbox, outbox = ARGF.argv
+night_reader = NightReader.new(inbox, outbox)
+night_reader.print_english
+puts night_reader.confirmation_message
 
 # ruby ./lib/night_reader.rb braille.txt original_message.txt

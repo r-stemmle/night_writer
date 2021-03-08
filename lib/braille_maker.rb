@@ -11,7 +11,7 @@ include BrailleDictionary
     @message = []
   end
 
-  def braille_printable(text)
+  def punch_braille(text)
     line = []
     braille_array(text).each_with_index do |braille_letter, index|
       if line_full(index)
