@@ -1,6 +1,4 @@
-require 'minitest/autorun'
-require 'minitest/pride'
-require './lib/braille_maker'
+require './test/test_helper'
 
 class BrailleMakerTest < Minitest::Test
 

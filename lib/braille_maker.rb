@@ -21,6 +21,7 @@ include BrailleDictionary
       elsif index == 0
         line = braille_letter
       else
+        # require "pry"; binding.pry
         line = line.zip(braille_letter).map(&:join)
       end
     end

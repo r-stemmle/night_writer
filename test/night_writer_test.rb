@@ -1,7 +1,5 @@
-require 'minitest/autorun'
-require 'minitest/pride'
-require './lib/night_writer'
-require 'mocha/minitest'
+require './test/test_helper'
+
 
 class NightWriterTest < Minitest::Test
 

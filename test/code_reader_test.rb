@@ -1,6 +1,5 @@
-require 'minitest/autorun'
-require 'minitest/pride'
-require './lib/code_reader'
+require './test/test_helper'
+
 
 class CodeReaderTest < Minitest::Test
 

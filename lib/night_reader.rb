@@ -30,9 +30,9 @@ class NightReader < CodeReader
 
 end
 
-inbox, outbox = ARGF.argv
-night_reader = NightReader.new(inbox, outbox)
-night_reader.print_english
-puts night_reader.confirmation_message
+# inbox, outbox = ARGF.argv
+# night_reader = NightReader.new(inbox, outbox)
+# night_reader.print_english
+# puts night_reader.confirmation_message
 
 # ruby ./lib/night_reader.rb braille.txt original_message.txt

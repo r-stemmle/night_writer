@@ -1,6 +1,4 @@
-require 'minitest/autorun'
-require 'minitest/pride'
-require './lib/alpha_maker'
+require './test/test_helper'
 
 class AlphaMakerTest < Minitest::Test
 

@@ -20,9 +20,9 @@ class NightWriter < CodeReader
 
 end
 
-inbox, outbox = ARGF.argv
-night_writer = NightWriter.new(inbox, outbox)
-night_writer.print_braille
-puts night_writer.confirmation_message
+# inbox, outbox = ARGF.argv
+# night_writer = NightWriter.new(inbox, outbox)
+# night_writer.print_braille
+# puts night_writer.confirmation_message
 
 # ruby lib/night_writer.rb message.txt braille.txt
