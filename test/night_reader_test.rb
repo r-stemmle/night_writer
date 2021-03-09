@@ -8,6 +8,20 @@ class NightReaderTest < Minitest::Test
     assert_instance_of NightReader, night_reader
   end
 
+  def test_it_can_go_braille_to_english
+    night_reader = NightReader.new("braille.txt", "original_message.txt")
+    night_reader.stubs(:make_alpha_ready).returns(["0.", "..", ".."])
+
+    assert_equal "a", night_reader.braille_to_english
+  end
+
+  def test_it_puts_the_text
+    night_reader = NightReader.new("braille.txt", "original_message.txt")
+    night_reader.stubs(:braille_to_english).returns("a")
+
+    refute night_reader.print_english
+  end
+
   def test_it_can_produce_message_as_array
     night_reader = NightReader.new("braille.txt", "original_message.txt")
 
